@@ -20,6 +20,13 @@ var static         = require( 'serve-static' );
 var app    = express();
 var routes = require( './routes' );
 
+// Datadog monitoring
+var StatsD = require('node-dogstatsd').StatsD;
+var dogstatsd = new StatsD();
+
+// Increment a counter.
+dogstatsd.increment('page.views')
+
 
 // all environments
 app.set( 'port', process.env.PORT || 3001 );
